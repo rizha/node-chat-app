@@ -14,7 +14,7 @@ const io = socketIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
-  console.log('new user connected');
+  
 
   socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
 
@@ -22,9 +22,9 @@ io.on('connection', (socket) => {
 
   
   socket.on('createMessage', (message, callback) => {
-    console.log('createMessage', message);
+    
     io.emit('newMessage', generateMessage(message.from, message.text));
-    callback('This is from the server.');
+    callback();
   });
 
   socket.on('createLocationMessage', (coords) => {
@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('User was disconnected!');
+    
   });
 });
 
